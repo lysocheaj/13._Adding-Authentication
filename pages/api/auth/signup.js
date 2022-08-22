@@ -1,5 +1,5 @@
 import { hashPassword } from "../../../lib/auth";
-import { ConnectDatabase, InsertDocument } from "../../../lib/db";
+import { ConnectDatabase } from "../../../lib/db";
 
 async function handler(req, res) {
   if (req.method !== "POST") return;
@@ -21,16 +21,17 @@ async function handler(req, res) {
 
   try {
     const db = client.db();
-    const enteredData = await db.collection("users").insertOne({
-      email: email,
-      password: password,
-    });
 
-    const existingUser = db.collection("users").findOne({ email: email });
+    const existingUser = await db.collection("users").findOne({ email: email });
     if (existingUser) {
       res.status(422).json({ message: "User already exist" });
       return;
     }
+    
+    const enteredData = await db.collection("users").insertOne({
+      email: email,
+      password: hashPassword(password),
+    });
 
     res
       .status(201)
