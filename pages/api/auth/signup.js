@@ -30,7 +30,7 @@ async function handler(req, res) {
     
     const enteredData = await db.collection("users").insertOne({
       email: email,
-      password: hashPassword(password),
+      password: await hashPassword(password),
     });
 
     res
