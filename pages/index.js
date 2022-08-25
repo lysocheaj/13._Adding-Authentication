@@ -1,4 +1,5 @@
-import StartingPageContent from '../components/starting-page/starting-page';
+import { Fragment } from "react";
+import StartingPageContent from "../components/starting-page/starting-page";
 
 function HomePage() {
   return <StartingPageContent />;
