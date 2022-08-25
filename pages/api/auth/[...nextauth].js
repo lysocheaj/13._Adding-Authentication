@@ -1,5 +1,4 @@
 import NextAuth from 'next-auth';
-import SessionProvider from 'next-auth/react';
 import CredentialProvider from "next-auth/providers/credentials";
 import { verifyPassword } from '../../../lib/auth';
 import { ConnectDatabase } from '../../../lib/db';
